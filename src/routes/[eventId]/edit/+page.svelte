@@ -1,12 +1,14 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import futureDate from '$lib/futureDate';
 
 	let { data }: { data: PageData } = $props();
+	let date = $state(data.event?.date ?? '');
+	let isFutureDate = $derived(date === '' ? false : futureDate(date));
 </script>
 
 {#if data.event}
 	<form method="POST" class="flex flex-col gap-4">
-		<!-- form for creating new event -->
 		<label for="title">Title</label>
 		<input
 			class="input"
@@ -27,14 +29,10 @@
 			value={data.event.description}
 		></textarea>
 		<label for="date">Date</label>
-		<input
-			class="input"
-			type="datetime-local"
-			id="date"
-			name="date"
-			value={data.event.date}
-			required
-		/>
+		<input class="input" type="datetime-local" id="date" name="date" bind:value={date} required />
+		{#if date !== '' && !isFutureDate}
+			<p>Date is in the past!</p>
+		{/if}
 		<button class="btn" type="submit">Update Event</button>
 		<a class="btn" href={'/' + data.event.id}>Cancel</a>
 	</form>

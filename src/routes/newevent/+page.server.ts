@@ -1,4 +1,5 @@
 import { createEvent } from '$lib/server/remote-events';
+import futureDate from '$lib/futureDate';
 import type { Actions } from './$types';
 import { error, redirect } from '@sveltejs/kit';
 
@@ -10,6 +11,9 @@ export const actions: Actions = {
 		const date = formdata.get('date')?.toString();
 		if (!title || !date) {
 			error(400, 'Title and Date are required');
+		}
+		if (!futureDate(date)) {
+			error(400, 'Date must be in the future');
 		}
 		const newEvent = await createEvent({ title, description, date });
 		redirect(303, `/${newEvent.id}`);
