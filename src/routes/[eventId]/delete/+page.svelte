@@ -18,7 +18,7 @@
 	}}
 >
 	<p>Are you sure you wish to delete this event?</p>
-	<div class='grid grid-cols-2 gap-2'>
+	<div class="grid grid-cols-2 gap-2">
 		<input class="btn" type="submit" value={deleting ? 'Deleting...' : 'Yes'} disabled={deleting} />
 		{#if deleting}
 			<a class="btn btn-disabled" role="link" aria-disabled="true">Cancel</a>

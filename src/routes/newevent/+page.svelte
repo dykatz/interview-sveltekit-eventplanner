@@ -53,7 +53,7 @@
 	{#if date !== '' && !isFutureDate}
 		<p>Date is in the past!</p>
 	{/if}
-	<div class='grid grid-cols-2 gap-2'>
+	<div class="grid grid-cols-2 gap-2">
 		<button class="btn" type="submit" disabled={creating || !isFutureDate}>
 			{#if creating}
 				Creating...
