@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import renderDate from '$lib/renderDate';
 
 	let { data }: { data: PageData } = $props();
 </script>
@@ -16,10 +17,10 @@
 {#await data.events}
 	<p>Loading...</p>
 {:then events}
-	{#each events as event}
+	{#each events as event (event.id)}
 		<a href={'/' + event.id} class="btn flex justify-between">
 			<div>{event.title}</div>
-			<div>{event.date}</div>
+			<div>{renderDate(event.date)}</div>
 		</a>
 	{:else}
 		<p>No events found!</p>
