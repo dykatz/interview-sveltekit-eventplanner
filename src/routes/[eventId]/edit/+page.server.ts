@@ -5,9 +5,8 @@ import { error, redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const eventId = parseInt(params.eventId);
-	const event = await fetchEventById(eventId);
 	return {
-		event
+		event: fetchEventById(eventId)
 	};
 };
 

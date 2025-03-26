@@ -9,9 +9,13 @@
 	<a class="btn" href="/newevent" role="button">Add Event</a>
 </div>
 
-{#each data.events as event}
+{#await data.events}
+	<p>Loading...</p>
+{:then events} 
+	{#each events as event}
 	<a href={'/' + event.id} class="btn flex justify-between">
 		<div>{event.title}</div>
 		<div>{event.date}</div>
 	</a>
-{/each}
+	{/each}
+{/await}
