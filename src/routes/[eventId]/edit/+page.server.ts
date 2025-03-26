@@ -1,14 +1,7 @@
-import { fetchEventById, updateEventById } from '$lib/server/remote-events';
+import { updateEventById } from '$lib/server/remote-events';
 import futureDate from '$lib/futureDate';
-import type { Actions, PageServerLoad } from './$types';
+import type { Actions } from './$types';
 import { error, redirect } from '@sveltejs/kit';
-
-export const load: PageServerLoad = async ({ params }) => {
-	const eventId = parseInt(params.eventId);
-	return {
-		event: fetchEventById(eventId)
-	};
-};
 
 export const actions: Actions = {
 	default: async ({ params, request }) => {
