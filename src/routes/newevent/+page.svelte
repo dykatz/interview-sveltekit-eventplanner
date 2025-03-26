@@ -4,6 +4,7 @@
 
 	let creating = $state(false);
 
+	let title = $state('');
 	let date = $state('');
 	let isFutureDate = $derived(date === '' ? false : futureDate(date));
 </script>
@@ -29,6 +30,7 @@
 		placeholder="Title"
 		required
 		disabled={creating}
+		bind:value={title}
 	/>
 	<label for="description">Description</label>
 	<textarea
@@ -54,7 +56,11 @@
 		<p>Date is in the past!</p>
 	{/if}
 	<div class="grid grid-cols-2 gap-2">
-		<button class="btn" type="submit" disabled={creating || !isFutureDate}>
+		<button
+			class="btn"
+			type="submit"
+			disabled={creating || title === '' || date === '' || !isFutureDate}
+		>
 			{#if creating}
 				Creating...
 			{:else}

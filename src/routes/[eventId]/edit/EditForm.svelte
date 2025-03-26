@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import futureDate from '$lib/futureDate';
-	import type { Event } from '$lib/server/remote-events';
+	import { type Event } from '$lib/server/remote-events';
 
 	let { event }: { event: Event } = $props();
 
 	let updating = $state(false);
 
-	let date = $state(event.date ?? '');
+	let title = $state(event.title);
+	let date = $state(event.date);
 	let isFutureDate = $derived(date === '' ? false : futureDate(date));
 </script>
 
@@ -30,7 +31,7 @@
 		id="title"
 		name="title"
 		placeholder="Title"
-		value={event.title}
+		bind:value={title}
 		required
 		disabled={updating}
 	/>
@@ -59,7 +60,11 @@
 		<p>Date is in the past!</p>
 	{/if}
 	<div class="grid grid-cols-2 gap-2">
-		<button class="btn" type="submit" disabled={updating || !isFutureDate}>
+		<button
+			class="btn"
+			type="submit"
+			disabled={updating || title === '' || date === '' || !isFutureDate}
+		>
 			{#if updating}
 				Updating...
 			{:else}
