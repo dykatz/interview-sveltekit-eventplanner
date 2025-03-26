@@ -53,16 +53,18 @@
 	{#if date !== '' && !isFutureDate}
 		<p>Date is in the past!</p>
 	{/if}
-	<button class="btn" type="submit" disabled={creating || !isFutureDate}>
+	<div class='grid grid-cols-2 gap-2'>
+		<button class="btn" type="submit" disabled={creating || !isFutureDate}>
+			{#if creating}
+				Creating...
+			{:else}
+				Create Event
+			{/if}
+		</button>
 		{#if creating}
-			Creating...
+			<a class="btn btn-disabled" role="link" aria-disabled="true">Cancel</a>
 		{:else}
-			Create Event
+			<a class="btn" href="/">Cancel</a>
 		{/if}
-	</button>
-	{#if creating}
-		<a class="btn btn-disabled" role="link" aria-disabled="true">Cancel</a>
-	{:else}
-		<a class="btn" href="/">Cancel</a>
-	{/if}
+	</div>
 </form>

@@ -17,5 +17,7 @@
 			<div>{event.title}</div>
 			<div>{event.date}</div>
 		</a>
+	{:else}
+		<p>No events found!</p>
 	{/each}
 {/await}

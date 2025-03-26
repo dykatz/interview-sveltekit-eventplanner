@@ -11,7 +11,7 @@
 	{#if event}
 		<h2 class="text-lg font-bold">{event.title}</h2>
 		<p>{event.description}</p>
-		<p>{event.date}</p>
+		<input class='input' type='datetime-local' disabled value={event.date} />
 
 		<div class="grid grid-cols-3 gap-2">
 			<a class="btn" href="/">Back</a>
