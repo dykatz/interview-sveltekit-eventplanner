@@ -20,7 +20,7 @@ The app currently supports server-side rendering (SSR) to fetch events data via 
 
 - One thing I'd like to do (but I do not know if it is possible in SvelteKit) is make use of the results from the `fetchAllEvents()` to populate the results of pages that use `fetchEventById()`. This is possible with TanStack Query's `initialData` parameter. It would make the transition between a loaded home page and any of the event pages instantaneous. I also know that TSQ has its own state management that is separate from SvelteKit's, so I would prefer to just use what SK gives me wherever possible.
 
-- I did not use exactly the same form/logic for both creating and editing events. I am adhering to the "do not repeat yourself *twice*" principle, because the logic only occurs twice in total, and the logic is different enough between them that trying to create a single API for both instances would be more involved than I'd like.
+- I did not use exactly the same form/logic for both creating and editing events. I am adhering to the "do not repeat yourself _twice_" principle, because the logic only occurs twice in total, and the logic is different enough between them that trying to create a single API for both instances would be more involved than I'd like.
 
 ## **Getting Started**
 
