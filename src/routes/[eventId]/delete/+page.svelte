@@ -5,6 +5,10 @@
 	let deleting = $state(false);
 </script>
 
+<svelte:head>
+	<title>Delete Event - Event Planner</title>
+</svelte:head>
+
 <form
 	method="POST"
 	class="flex flex-col gap-4"

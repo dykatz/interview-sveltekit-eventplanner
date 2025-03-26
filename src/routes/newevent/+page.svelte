@@ -9,6 +9,10 @@
 	let isFutureDate = $derived(date === '' ? false : futureDate(date));
 </script>
 
+<svelte:head>
+	<title>Add Event - Event Planner</title>
+</svelte:head>
+
 <form
 	method="POST"
 	class="flex flex-col gap-4"

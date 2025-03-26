@@ -5,6 +5,10 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
+<svelte:head>
+	<title>Edit Event - Event Planner</title>
+</svelte:head>
+
 {#await data.event}
 	<h2>Loading...</h2>
 	<a class="btn" href="/">Back</a>

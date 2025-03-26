@@ -4,6 +4,18 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
+<svelte:head>
+	{#await data.event}
+		<title>Loading - Event Planner</title>
+	{:then event}
+		{#if event}
+			<title>{event.title} - Event Planner</title>
+		{:else}
+			<title>No Event Found - Event Planner</title>
+		{/if}
+	{/await}
+</svelte:head>
+
 {#await data.event}
 	<h2>Loading...</h2>
 	<a class="btn" href="/">Back</a>

@@ -4,6 +4,10 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
+<svelte:head>
+	<title>Event Planner</title>
+</svelte:head>
+
 <div class="flex items-baseline justify-between">
 	<h1 class="text-2xl">Events</h1>
 	<a class="btn" href="/newevent" role="button">Add Event</a>
