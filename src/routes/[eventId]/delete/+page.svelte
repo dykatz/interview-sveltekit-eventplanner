@@ -1,9 +1,27 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { page } from '$app/state';
+
+	let deleting = $state(false);
 </script>
 
-<form method="POST" class="flex flex-col gap-4">
+<form
+	method="POST"
+	class="flex flex-col gap-4"
+	use:enhance={() => {
+		deleting = true;
+
+		return async ({ update }) => {
+			await update();
+			deleting = false;
+		};
+	}}
+>
 	<p>Are you sure you wish to delete this event?</p>
-	<input class="btn" type="submit" value="Yes" />
-	<a class="btn" href={'/' + page.params.eventId}>Cancel</a>
+	<input class="btn" type="submit" value={deleting ? 'Deleting...' : 'Yes'} disabled={deleting} />
+	{#if deleting}
+		<a class="btn btn-disabled" role="link" aria-disabled="true">Cancel</a>
+	{:else}
+		<a class="btn" href={'/' + page.params.id}>Cancel</a>
+	{/if}
 </form>
