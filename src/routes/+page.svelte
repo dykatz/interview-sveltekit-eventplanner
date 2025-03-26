@@ -11,11 +11,11 @@
 
 {#await data.events}
 	<p>Loading...</p>
-{:then events} 
+{:then events}
 	{#each events as event}
-	<a href={'/' + event.id} class="btn flex justify-between">
-		<div>{event.title}</div>
-		<div>{event.date}</div>
-	</a>
+		<a href={'/' + event.id} class="btn flex justify-between">
+			<div>{event.title}</div>
+			<div>{event.date}</div>
+		</a>
 	{/each}
 {/await}

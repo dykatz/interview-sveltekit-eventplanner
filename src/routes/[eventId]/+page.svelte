@@ -7,7 +7,7 @@
 {#await data.event}
 	<h2>Loading...</h2>
 	<a class="btn" href="/">Back</a>
-{:then event} 
+{:then event}
 	{#if event}
 		<h2 class="text-lg font-bold">{event.title}</h2>
 		<p>{event.description}</p>

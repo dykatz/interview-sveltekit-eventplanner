@@ -8,7 +8,7 @@
 {#await data.event}
 	<h2>Loading...</h2>
 	<a class="btn" href="/">Back</a>
-{:then event} 
+{:then event}
 	{#if event}
 		<EditForm {event} />
 	{:else}
