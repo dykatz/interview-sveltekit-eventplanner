@@ -6,7 +6,15 @@
 </script>
 
 <svelte:head>
-	<title>Edit Event - Event Planner</title>
+	{#await data.event}
+		<title>Edit Event - Event Planner</title>
+	{:then event}
+		{#if event}
+			<title>Edit - {event.title} - Event Planner</title>
+		{:else}
+			<title>No Event Found - Event Planner</title>
+		{/if}
+	{/await}
 </svelte:head>
 
 {#await data.event}
