@@ -4,6 +4,24 @@ This is an event planning app built using **SvelteKit**. The user can see their 
 
 The app currently supports server-side rendering (SSR) to fetch events data via the **Events Interface** defined under $lib/server/remote-events.ts, and route-based navigation for different events (e.g., `/eventid`).
 
+## Dylan's Notes
+
+- I opted to keep the TailwindCSS + DaisyUI combination, and I made better use of them throughout the application to give it a consistent design. I did not want to over think the design too much, and so kept everything in a narrow column in the center of the screen. I also used the browser's native inputs and date pickers.
+
+- I made use of response streaming _everywhere_, which makes the app feel better at the expense of worse SEO. I am making the assumption that we are not going to need SEO that much. I do not know if it would ever be necessary for this application, but if it was, I would need to do some research into if it is possible for Svelte to use full SSR for a page on initial load while using response streaming when doing client-side navigation.
+
+- I put the edit and delete actions for each event on their own pages, nested underneath the main event page. By doing this, I was able to get them to share fetching the event information with each other, which makes page navigation between them (after loading) instant.
+
+- I avoided blocking various actions on waiting for responses. For example, on the event deletion page, the delete button renders before it knows if the event actually exists. This is not risky because in the event that the user clicks the button early, they are simply navigated back home anyways. Only the name of the event is blocked on the request. On the other pages where loading content is more necessary, I only displayed the back button while loading is in progress.
+
+- When a user submits a form, I disable all inputs until it completes to avoid odd behavior. The loading indicator is that the text on the submit button changes conjugation and has "..." at the end. I could adjust this to make it animated or spinny, but I personally do not like those, and so I did not implement it.
+
+- To ensure that the user cannot create an event in the past, I validate the date on both the frontend and the backend. The user will not be allowed to submit an invalid date. However, if there is no JS running (or the user submits a direct POST request with `curl(1)`) I also validate server side to avoid letting invalid data get inserted. I still need to do more research on how SvelteKit wants me to do proper error handling, because right now the resulting user experience on this is not satisfactory.
+
+- One thing I'd like to do (but I do not know if it is possible in SvelteKit) is make use of the results from the `fetchAllEvents()` to populate the results of pages that use `fetchEventById()`. This is possible with TanStack Query's `initialData` parameter. It would make the transition between a loaded home page and any of the event pages instantaneous. I also know that TSQ has its own state management that is separate from SvelteKit's, so I would prefer to just use what SK gives me wherever possible.
+
+- I did not use exactly the same form/logic for both creating and editing events. I am adhering to the "do not repeat yourself *twice*" principle, because the logic only occurs twice in total, and the logic is different enough between them that trying to create a single API for both instances would be more involved than I'd like.
+
 ## **Getting Started**
 
 ### **Recommended Editor and Extensions**
