@@ -7,7 +7,7 @@
 </svelte:head>
 
 <h2>Error Editing Event</h2>
-<p>{page.error}</p>
+<p>{page.error?.message ?? 'Unknown error'}</p>
 
 <div class="grid grid-cols-2 gap-2">
 	<a class="btn" href={'/' + page.params.eventId}>Return to Event</a>

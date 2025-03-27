@@ -7,6 +7,6 @@
 </svelte:head>
 
 <h2>Error Adding Event</h2>
-<p>{page.error}</p>
+<p>{page.error?.message ?? 'Unknown error'}</p>
 
 <a class="btn" href="/">Return Home</a>
