@@ -22,7 +22,7 @@ test('go through flow of creating and deleting an event', async ({ page }) => {
 	const titleInput = page.getByLabel('Title');
 	const dateInput = page.getByLabel('Date');
 	const submitButton = page.getByText('Create Event');
-	
+
 	// Verify that an empty form cannot be submitted
 	await expect(submitButton).toBeDisabled();
 
@@ -38,7 +38,7 @@ test('go through flow of creating and deleting an event', async ({ page }) => {
 	// Fill in the date with an hour in the future, and verify that it can now be clicked
 	const newDate = new Date();
 	newDate.setHours(newDate.getHours() + 1);
-	const newDateStr = renderDate(newDate)
+	const newDateStr = renderDate(newDate);
 	await dateInput.fill(newDateStr);
 	await expect(submitButton).not.toBeDisabled();
 

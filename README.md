@@ -6,7 +6,7 @@ The app currently supports server-side rendering (SSR) to fetch events data via 
 
 ## Dylan's Notes
 
-- I opted to keep the TailwindCSS + DaisyUI combination, and I made better use of them throughout the application to give it a consistent design. I did not want to over think the design too much, and so kept everything in a narrow column in the center of the screen. I also used the browser's native inputs and date pickers.
+- I opted to keep the TailwindCSS + DaisyUI combination, and I made better use of them throughout the application to give it a consistent design. I did not want to over think the design too much, and so kept everything in a narrow column in the center of the screen. I also used the browser's native inputs and date pickers. I know that using a component library can help me, especially with accessibility, but I am not familiar enough with Svelte's component library ecosystem.
 
 - I made use of response streaming _everywhere_, which makes the app feel better at the expense of worse SEO. I am making the assumption that we are not going to need SEO that much. I do not know if it would ever be necessary for this application, but if it was, I would need to do some research into if it is possible for Svelte to use full SSR for a page on initial load while using response streaming when doing client-side navigation.
 
@@ -21,6 +21,10 @@ The app currently supports server-side rendering (SSR) to fetch events data via 
 - One thing I'd like to do (but I do not know if it is possible in SvelteKit) is make use of the results from the `fetchAllEvents()` to populate the results of pages that use `fetchEventById()`. This is possible with TanStack Query's `initialData` parameter. It would make the transition between a loaded home page and any of the event pages instantaneous. I also know that TSQ has its own state management that is separate from SvelteKit's, so I would prefer to just use what SK gives me wherever possible.
 
 - I did not use exactly the same form/logic for both creating and editing events. I am adhering to the "do not repeat yourself _twice_" principle, because the logic only occurs twice in total, and the logic is different enough between them that trying to create a single API for both instances would be more involved than I'd like.
+
+- I have added some tests. They are visible as unit tests for the helper functions I wrote under `lib/`, a component level test for `EditForm` (which is currently incomplete as I was having issues with the testing library and wanted to move on to handle other functionality), and an end-to-end test that covers creating, editing and deleting.
+
+- Something missing from the current body of work is accessibility. I have not gone through all the elements and ensured that everything has proper `role` attributes and the correct aria labels. If implemented, this could also make writing the tests a lot easier. This is something that, as mentioned previously, could be helped with a component library, but I am not familiar enough with the Svelte ecosystem to risk using the wrong one.
 
 ## **Getting Started**
 
