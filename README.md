@@ -6,13 +6,15 @@ The app currently supports server-side rendering (SSR) to fetch events data via 
 
 ## Dylan's Notes
 
+I briefly used Svelte for a personal hobby project back in 2021. That was before the introductions of both SvelteKit and Runes, and so over the course of this project I had to get up to speed on all of these new developments. Since then, all of my professional development experience has been in React (including some Next.js), and the framework I've been most interested in for personal projects is Solid.js. This last part was quite convenient for getting up to speed with modern Svelte, as Runes copied Solid.js's semantics and SvelteKit's data loading patterns are somewhat similar to Solid Router's. Overall, my experience with modern Svelte was very pleasant, and I look forward to the opportunity to use it more professionally.
+
 - I opted to keep the TailwindCSS + DaisyUI combination, and I made better use of them throughout the application to give it a consistent design. I did not want to over think the design too much, and so kept everything in a narrow column in the center of the screen. I also used the browser's native inputs and date pickers. I know that using a component library can help me, especially with accessibility, but I am not familiar enough with Svelte's component library ecosystem.
 
 - I made use of response streaming _everywhere_, which makes the app feel better at the expense of worse SEO. I am making the assumption that we are not going to need SEO that much. I do not know if it would ever be necessary for this application, but if it was, I would need to do some research into if it is possible for Svelte to use full SSR for a page on initial load while using response streaming when doing client-side navigation.
 
 - I put the edit and delete actions for each event on their own pages, nested underneath the main event page. By doing this, I was able to get them to share fetching the event information with each other, which makes page navigation between them (after loading) instant.
 
-- I avoided blocking various actions on waiting for responses. For example, on the event deletion page, the delete button renders before it knows if the event actually exists. This is not risky because in the event that the user clicks the button early, they are simply navigated back home anyways. Only the name of the event is blocked on the request. On the other pages where loading content is more necessary, I only displayed the back button while loading is in progress.
+- I avoided blocking various actions on waiting for responses. For example, on the event deletion page, the delete button renders before it knows if the event actually exists. This is not risky because in the event that the user clicks the button early, they are simply navigated back home anyways. Only the name of the event is blocked on the request. On the other pages where loading content is more necessary, I only displayed the back button while loading is in progress. An improvement that I could work on with more time would be to make the loading screen include something closer to the final appearance of the page, which could reduce the visual jump when the page loads in. This is more important for things like buttons, because it isn't good for a button to be clickable by the user, and then have it move while the user is trying to click it.
 
 - When a user submits a form, I disable all inputs until it completes to avoid odd behavior. The loading indicator is that the text on the submit button changes conjugation and has "..." at the end. I could adjust this to make it animated or spinny, but I personally do not like those, and so I did not implement it.
 
@@ -24,7 +26,11 @@ The app currently supports server-side rendering (SSR) to fetch events data via 
 
 - I have added some tests. They are visible as unit tests for the helper functions I wrote under `lib/`, a component level test for `EditForm` (which is currently incomplete as I was having issues with the testing library and wanted to move on to handle other functionality), and an end-to-end test that covers creating, editing and deleting.
 
-- Something missing from the current body of work is accessibility. I have not gone through all the elements and ensured that everything has proper `role` attributes and the correct aria labels. If implemented, this could also make writing the tests a lot easier. This is something that, as mentioned previously, could be helped with a component library, but I am not familiar enough with the Svelte ecosystem to risk using the wrong one.
+- I have not put a significant amount of time into accessability. This is something that, as mentioned previously, could be helped with a component library, but I am not familiar enough with the Svelte ecosystem to risk using the wrong one. I have run a the pages through Google Lighthouse to verify that there weren't any obvious issues, but given more time I could subject it to a more serious audit, including testing usage of the site with a real screen reader.
+
+- I included JSDoc comments for the bare typescript files under `lib/`. I would have included similar comments for Svelte components, but [there does not appear to be a standard way to do that](https://github.com/sveltejs/language-tools/issues/516). Most of the blog posts I saw for techniques people were using were limited to pre-Runes Svelte.
+
+- I have not done any testing or accommodations within the application for operations in a non-JS environment. I would have liked to do this given more time as the ability to work with bare forms without any JS required is one of SvelteKit's selling points.
 
 ## **Getting Started**
 
