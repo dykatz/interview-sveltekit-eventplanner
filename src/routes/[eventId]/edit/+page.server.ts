@@ -10,13 +10,19 @@ export const actions: Actions = {
 		const title = formdata.get('title')?.toString();
 		const description = formdata.get('description')?.toString();
 		const date = formdata.get('date')?.toString();
+		const important = formdata.get('important')?.toString();
 		if (!title || !date) {
 			error(400, 'Title and Date are required');
 		}
 		if (!futureDate(date)) {
 			error(400, 'Date must be in the future');
 		}
-		await updateEventById(eventId, { title, description, date });
+		await updateEventById(eventId, {
+			title,
+			description,
+			date, 
+			important: important === 'on'
+		});
 		redirect(303, `/${eventId}`);
 	}
 };

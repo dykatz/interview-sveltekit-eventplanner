@@ -18,10 +18,16 @@
 	<p>Loading...</p>
 {:then events}
 	{#each events as event (event.id)}
-		<a href={'/' + event.id} class="btn flex justify-between">
-			<div>{event.title}</div>
-			<div>{renderDate(event.date)}</div>
-		</a>
+		<div class='flex gap-2 items-center w-full'>
+			<form method='POST' action='?/toggleImportance'>
+				<input type='text' name='id' class='hidden' value={event.id} />
+				<input type='submit' value={event.important ? 'Make Not Important' : 'Make Important'} class='btn' />
+			</form>
+			<a href={'/' + event.id} class="btn flex justify-between flex-grow">
+				{event.title}
+				<div>{renderDate(event.date)}</div>
+			</a>
+		</div>
 	{:else}
 		<p>No events found!</p>
 	{/each}

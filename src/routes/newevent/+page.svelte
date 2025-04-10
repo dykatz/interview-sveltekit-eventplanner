@@ -36,6 +36,10 @@
 		disabled={creating}
 		bind:value={title}
 	/>
+	<div class="flex gap-2">
+		<input type="checkbox" class="checkbox" id="important" name="important" />
+		<label for="important">Important?</label>
+	</div>
 	<label for="description">Description</label>
 	<textarea
 		id="description"

@@ -7,6 +7,7 @@ export interface Event {
 	title: string;
 	description?: string;
 	date: string; // ISO 8601 format (e.g., '2025-01-01T12:00:00Z')
+	important: boolean;
 }
 
 // Initialize Storage for events (using the same file for persistence)
@@ -85,4 +86,20 @@ export function deleteEventById(id: number): Promise<boolean> {
 
 	eventStorage.write(filteredEvents);
 	return simulateDelay(true);
+}
+
+export function toggleImportanceById(id: number): Promise<boolean | null> {
+	const events = eventStorage.read();
+	const index = events.findIndex((event) => event.id === id);
+
+	if (index === -1) {
+		return simulateDelay(null); // Event not found
+	}
+
+	// Merge the updates with the existing event
+	const updated = { ...events[index], important: !events[index].important };
+	events[index] = updated;
+
+	eventStorage.write(events);
+	return simulateDelay(updated.important);
 }

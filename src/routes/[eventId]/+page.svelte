@@ -25,6 +25,10 @@
 		<h2 class="text-lg font-bold">{event.title}</h2>
 		<p>{event.description}</p>
 		<p>{renderDate(event.date)}</p>
+		
+		{#if event.important}
+			<p>This event is important!</p>
+		{/if}
 
 		<div class="grid grid-cols-3 gap-2">
 			<a class="btn" href="/">Back</a>

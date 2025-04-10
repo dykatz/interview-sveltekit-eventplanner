@@ -35,6 +35,10 @@
 		required
 		disabled={updating}
 	/>
+	<div class="flex gap-2">
+		<input type="checkbox" class="checkbox" id="important" name="important" checked={event.important} />
+		<label for="important">Important?</label>
+	</div>
 	<label for="description">Description</label>
 	<textarea
 		id="description"
